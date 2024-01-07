@@ -29,6 +29,8 @@ function safe_end_procs {
     cmd="C-c"
     if [[ "$pane_proc" == "vi" ]] || [[ "$pane_proc" == "vim" ]] || [[ "$pane_proc" == "nvim" ]]; then
       cmd=$([[ $envcfg_use_forcequit_approach == 1 ]] && echo 'Escape ":qa!" Enter' || echo 'Escape ":qa" Enter')
+    elif [[ "$pane_proc" == "beam.smp" ]]; then
+      cmd="C-c C-c"
     elif [[ "$pane_proc" == "emacs" ]]; then
       cmd="C-x C-c"
     elif [[ "$pane_proc" == "man" ]] || [[ "$pane_proc" == "less" ]]; then
@@ -62,6 +64,7 @@ function safe_kill_panes_of_current_session {
 }
 
 read_env_config
+safe_kill_panes_of_current_session
 safe_kill_panes_of_current_session
 safe_kill_panes_of_current_session
 exit 0
